@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BP Group of Companies</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: 0.8s; }
+    .fade-in.show { opacity: 1; transform: translateY(0); }
+
+    /* Premium logo intro animation */
+    @keyframes logoIntro {
+      0% { opacity: 0; transform: scale(0.6) rotate(-10deg); }
+      60% { opacity: 1; transform: scale(1.1) rotate(2deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    .logo-animate {
+      animation: logoIntro 1.4s ease-out;
+    }
+
+    /* Optional glow */
+    .logo-glow {
+      filter: drop-shadow(0 0 10px rgba(123, 97, 255, 0.6));
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- HEADER -->
+<header class="bg-purple-800 text-white p-6 text-center">
+  <img src="logo.png" class="mx-auto w-24 mb-2 logo-animate logo-glow " />
+  <h1 class="text-2xl font-bold">BP GROUP</h1>
+  <p>OF COMPANIES</p>
+</header>
+
+<!-- HERO -->
+<section class="text-center py-16 bg-white fade-in">
+  <h2 class="text-3xl font-bold text-purple-800">Property • Investment • Biogas</h2>
+  <p class="mt-3 text-gray-600">Building the future with sustainable and profitable solutions</p>
+</section>
+
+<!-- SERVICES -->
+<section class="py-12 max-w-6xl mx-auto px-6 fade-in">
+  <h3 class="text-2xl font-semibold text-purple-800 mb-6">Our Services</h3>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h4 class="font-bold text-purple-700">Property Development</h4>
+      <p class="text-sm text-gray-600">Land & real estate solutions.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h4 class="font-bold text-purple-700">Investment</h4>
+      <p class="text-sm text-gray-600">Secure and high-return opportunities.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h4 class="font-bold text-purple-700">Biogas Energy</h4>
+      <p class="text-sm text-gray-600">Eco-friendly energy projects.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTY LISTINGS -->
+<section class="bg-gray-200 py-12 fade-in">
+  <div class="max-w-6xl mx-auto px-6">
+    <h3 class="text-2xl font-semibold text-purple-800 mb-6">Available Properties</h3>
+    <div id="properties" class="grid md:grid-cols-3 gap-6"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="py-12 max-w-6xl mx-auto px-6 fade-in">
+  <h3 class="text-2xl font-semibold text-purple-800 mb-4">Contact Us</h3>
+  <form action="https://formspree.io/f/yourformid" method="POST" class="grid gap-4 max-w-md">
+    <input type="hidden" name="company" value="BP Group" />
+    <input type="text" name="name" placeholder="Name" required class="p-3 border rounded-xl" />
+    <input type="email" name="email" placeholder="Email" required class="p-3 border rounded-xl" />
+    <textarea name="message" placeholder="Message" required class="p-3 border rounded-xl"></textarea>
+    <button class="bg-purple-700 text-white py-3 rounded-xl">Send</button>
+  </form>
+</section>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/1234567890" target="_blank" class="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg">
+  💬
+</a>
+
+<!-- FOOTER -->
+<footer class="bg-purple-800 text-white text-center p-4">
+  © 2026 BP Group | Contact: +44 7982336951 | Email: balalettings1@hotmail.com
+</footer>
+
+<!-- SCRIPT -->
+<script>
+// Scroll Animation
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+  });
+});
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Property Data
+// Owner Info
+const owner = {
+  name: "Mrs Gunapalan Vamathevan (Bala)",
+  phone: "+44 7982336951",
+  email: "balalettings1@hotmail.com"
+};
+
+const properties = [
+  {title: "Commercial properties", price: "£120,000"},
+  {title: "Commercial Land", price: "£80,000"},
+  {title: "Farm Land", price: "£50,000"}
+];
+
+const container = document.getElementById('properties');
+properties.forEach(p => {
+  container.innerHTML += `
+    <div class="bg-white p-4 rounded-xl shadow hover:scale-105 transition">
+      <h4 class="font-bold text-purple-700">${p.title}</h4>
+      <p class="text-gray-600">${p.price}</p>
+    </div>`;
+});
+</script>
+
+</body>
+</html>
+
+<!-- ADMIN PANEL (Netlify CMS) -->
+<!-- Create folder: /admin -->
+<!-- File: admin/index.html -->
+
+<!-- Paste this in admin/index.html -->
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+</head>
+<body></body>
+</html>
+-->
+
+<!-- Create file: admin/config.yml -->
+<!--
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "properties"
+    label: "Properties"
+    folder: "content/properties"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+-->
